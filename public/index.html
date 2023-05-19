@@ -59,14 +59,14 @@
 			});
 
 			function ping() {
-				log(`${getTimestamp()}: Sending: Ping`);
+				log("Sending: Ping");
 				SOCKET.emit("ping", {}, (response) => {
-					log(`${getTimestamp()}: Received: ${response}`);
+					log("Received: ${response}");
 				});
 			}
 
 			function log(message) {
-				TEXTAREA.value += message + "\n";
+				TEXTAREA.value += `${getTimestamp()}:  message + \n`;
 				TEXTAREA.scrollTop = TEXTAREA.scrollHeight;
 			}
 
