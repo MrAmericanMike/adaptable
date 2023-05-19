@@ -1,0 +1,30 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100vw;
+	height: 100vh;
+}
+
+body {
+	background-color: #101020;
+	color: aliceblue;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+	text-align: center;
+	padding-top: 0.5rem;
+}
+
+textarea {
+	display: block;
+	margin: 0px auto;
+	margin-top: 1rem;
+	font-size: 1.25rem;
+	resize: vertical;
+}
