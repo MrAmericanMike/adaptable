@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="/socket.io/socket.io.js"></script>
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+				box-sizing: border-box;
+			}
+			html,
+			body {
+				width: 100vw;
+				height: 100vh;
+			}
+			body {
+				background-color: #101020;
+				color: aliceblue;
+				font-family: Verdana, Geneva, Tahoma, sans-serif;
+			}
+			h1 {
+				text-align: center;
+				padding-top: 0.5rem;
+			}
+			textarea {
+				display: block;
+				margin: 0px auto;
+				margin-top: 1rem;
+				font-size: 1.25rem;
+				resize: vertical;
+			}
+		</style>
+		<title>Socketeer</title>
+	</head>
+
+	<body>
+		<h1>Socketeer</h1>
+
+		<textarea cols="50" rows="20"></textarea>
+
+		<script>
+			const SOCKET = io();
+			const TEXTAREA = document.querySelector("textarea");
+
+			SOCKET.on("connect", () => {
+				ping();
+				setInterval(ping, 30000);
+			});
+
+			function ping() {
+				log(`${getTimestamp()}: Sending: Ping`);
+				SOCKET.emit("ping", {}, (response) => {
+					log(`${getTimestamp()}: Received: ${response}`);
+				});
+			}
+
+			function log(message) {
+				TEXTAREA.value += message + "\n";
+				TEXTAREA.scrollTop = TEXTAREA.scrollHeight;
+			}
+
+			function getTimestamp() {
+				const NOW = new Date();
+
+				return `${NOW.getHours().toString().padStart(2, "0")}:${NOW.getMinutes().toString().padStart(2, "0")}:${NOW.getSeconds()
+					.toString()
+					.padStart(2, "0")}.${NOW.getMilliseconds().toString().padStart(3, "0")}`;
+			}
+		</script>
+	</body>
+</html>
+
