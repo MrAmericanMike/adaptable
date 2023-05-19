@@ -24,7 +24,7 @@ function ping() {
 }
 
 function log(message) {
-	TEXTAREA.value += `${getTimestamp()}:  message + \n`;
+	TEXTAREA.value += `${getTimestamp()}: ${message}\n`;
 	TEXTAREA.scrollTop = TEXTAREA.scrollHeight;
 }
 
