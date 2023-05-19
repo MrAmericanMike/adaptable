@@ -50,8 +50,12 @@
 				if (!INTERVAL) {
 					log("Setting interval");
 					ping();
-					INTERVAL = setInterval(ping, 30000);
+					INTERVAL = setInterval(ping, 10000);
 				}
+			});
+
+			SOCKET.on("disconnect", () => {
+				log("Disconnected");
 			});
 
 			function ping() {
