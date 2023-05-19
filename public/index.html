@@ -44,10 +44,13 @@
 		<script>
 			const SOCKET = io();
 			const TEXTAREA = document.querySelector("textarea");
-
+			let INTERVAL;
 			SOCKET.on("connect", () => {
-				ping();
-				setInterval(ping, 30000);
+				log("Connected to server");
+				if (!INTERVAL) {
+					ping();
+					INTERVAL = setInterval(ping, 30000);
+				}
 			});
 
 			function ping() {
