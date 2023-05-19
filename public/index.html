@@ -48,6 +48,7 @@
 			SOCKET.on("connect", () => {
 				log("Connected to server");
 				if (!INTERVAL) {
+					log("Setting interval");
 					ping();
 					INTERVAL = setInterval(ping, 30000);
 				}
@@ -67,7 +68,6 @@
 
 			function getTimestamp() {
 				const NOW = new Date();
-
 				return `${NOW.getHours().toString().padStart(2, "0")}:${NOW.getMinutes().toString().padStart(2, "0")}:${NOW.getSeconds()
 					.toString()
 					.padStart(2, "0")}.${NOW.getMilliseconds().toString().padStart(3, "0")}`;
