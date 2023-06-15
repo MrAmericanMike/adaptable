@@ -1,16 +1,12 @@
-const Express = require("express");
-const APP = Express();
+const KOA = require("koa");
+const APP = new KOA();
+const STATIC = require("koa-static");
 const HTTP = require("http");
-const SERVER = HTTP.createServer(APP);
-const { Server } = require("socket.io");
-const IO = new Server(SERVER);
+const HTTP_SERVER = HTTP.createServer(APP.callback());
+const IO = require("socket.io")(HTTP_SERVER);
 const PORT = process.env.PORT || 5050;
 
-APP.use(Express.static("./public"));
-
-APP.get("/ping", (req, res) => {
-	res.send("<h1>Pong</h1>");
-});
+APP.use(STATIC("./public"));
 
 IO.on("connection", async (socket) => {
 	console.log("Client connected");
@@ -24,7 +20,7 @@ IO.on("connection", async (socket) => {
 	});
 });
 
-SERVER.listen(PORT, () => {
+HTTP_SERVER.listen(PORT, () => {
 	console.log(`Listening on PORT ${PORT}`);
 });
 
